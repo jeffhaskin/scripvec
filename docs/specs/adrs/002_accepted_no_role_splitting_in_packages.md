@@ -77,7 +77,7 @@ Until a trigger fires, resist the temptation to add role-folders speculatively. 
 
 - `/data/projects/flywheel/personas/monorepo_architect.md` — source of the recommendation; see the "Core principles" section, specifically the *"Inside a domain, then split by role"* principle and its scale caveat.
 - `docs/specs/adrs/003_accepted_mvp_folder_structure.md` — defines the packages this ADR governs.
-- `docs/specs/change_requests/drafting/cr_001_vector_search_mvp.md` — MVP scope.
+- `cr_001_vector_search_mvp.md` — MVP scope.
 
 ## Conflicts surfaced
 

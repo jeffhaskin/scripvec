@@ -95,7 +95,7 @@ The language stack for scripvec MVP is **not** locked by this ADR. A separate AD
 - `/data/projects/flywheel/personas/monorepo_architect.md` — source of the recommendation; see "Tooling floor — conditional, because stack is undecided."
 - `docs/specs/adrs/003_accepted_mvp_folder_structure.md` — the structure this tooling operates on.
 - `docs/specs/adrs/002_accepted_no_role_splitting_in_packages.md` — tooling enforces inter-package boundaries; intra-package structure stays flat.
-- `docs/specs/change_requests/drafting/cr_001_vector_search_mvp.md` — MVP scope whose implementation will invoke the chosen recipe.
+- `cr_001_vector_search_mvp.md` — MVP scope whose implementation will invoke the chosen recipe.
 
 ## Conflicts surfaced
 

@@ -83,7 +83,7 @@ When an invariant is violated, the system fails with a clear, immediate error ra
 ## Links
 
 - `docs/principles/001_vector_retrieval.md` — the eval-first disposition underwrites this ADR; a silent fallback in the retrieval path invalidates every eval number.
-- `docs/specs/change_requests/drafting/cr_001_vector_search_mvp.md` — MVP scope; this ADR governs every component listed in that CR.
+- `cr_001_vector_search_mvp.md` — MVP scope; this ADR governs every component listed in that CR.
 
 ## Conflicts surfaced
 
