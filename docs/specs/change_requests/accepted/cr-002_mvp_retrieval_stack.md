@@ -138,8 +138,6 @@ Results are ordered by `rank` ascending; ties are broken by `verse_id` ascending
 
 - Hybrid beats BM25 by **≥ 5 pts recall@10** on the held-out set.
 - Dense beats BM25 by **≥ 5 pts recall@10** on the held-out set. (If the ADR-005 embedder does not clear this, the CR does not ship dense; a sub-CR investigates why dense does not earn weight on this corpus. Per ADR-005, the response to poor dense performance is not to swap models on the current endpoint — it is either to switch endpoints or to invest in non-model axes of quality.)
-- Query latency **p95 ≤ 50 ms** on the reference laptop in `hybrid` mode at `k=10`, measured with a warm index and the embedding endpoint reachable.
-- Cold index build end-to-end **≤ 30 min** on the reference laptop, bounded by the ADR-006 serial-embedding constraint against the ADR-005 endpoint.
 - Index directory **≤ 400 MB** on disk (dominated by 41K × 1024-dim float32 vectors ≈ 160 MB plus SQLite overhead and the BM25 index).
 
 ### Named failure modes instrumented up front

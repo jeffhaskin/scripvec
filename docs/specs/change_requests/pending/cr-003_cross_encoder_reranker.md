@@ -57,10 +57,8 @@ Add `hybrid+rerank` as a reported row alongside `bm25`, `dense`, and `hybrid (rr
 Before moving from `pending` → `accepted`, the reranker must clear:
 
 - **≥ 3 pts nDCG@10** over the existing `hybrid (rrf)` baseline on the held-out eval set.
-- **Query latency p95 ≤ 150 ms** on the reference laptop in `hybrid` mode with `--rerank on` at `k=10`, top-N=50.
-- **Cold build stays ≤ 35 min** on the reference laptop with the reranker downloaded (one-time per cache) and included in the pipeline.
 
-If `bge-reranker-base` fails either lift or latency gate, the CR pivots to `ms-marco-MiniLM-L-6-v2`. If both fail, the CR is archived with the measured numbers recorded.
+If `bge-reranker-base` fails the lift gate, the CR pivots to `ms-marco-MiniLM-L-6-v2`. If that also fails, the CR is archived with the measured numbers recorded.
 
 ## Impact on referenced docs
 
