@@ -88,7 +88,6 @@ The language stack for scripvec MVP is **not** locked by this ADR. A separate AD
 - **A CR that introduces code must pick the stack first.** The stack choice is pre-validated against this ADR — the chosen recipe applies verbatim.
 - **Every `pyproject.toml` (Python path) or `package.json` (TS path) is reviewed at creation time** to confirm it extends the root config and does not introduce alternative tooling.
 - **`ruff` / `mypy` / `eslint` errors fail CI** (once CI exists). No packages are exempt without a README-documented and ADR-amended justification.
-- **Reconsider if:** a second developer joins and the floor proves insufficient for coordination; or the graph genuinely outgrows Turborepo / `uv` workspaces; or a future CR requires cross-package orchestration (parallel builds with shared caching across both languages) that neither recipe handles.
 
 ## Links
 

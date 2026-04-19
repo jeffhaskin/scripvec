@@ -71,7 +71,6 @@ Until a trigger fires, resist the temptation to add role-folders speculatively. 
 
 - **Per-package README states the rule.** Each package's `README.md` contains a line to the effect of *"flat layout per ADR-002; no internal role-folders until the trigger fires."* This keeps the intent visible where decisions happen.
 - **Size audit at each CR boundary.** Before closing a change request that adds code, confirm no package has crossed a revisit trigger. If one has, open an ADR amendment or a sub-CR for the role split before closing.
-- **Reconsider if:** the monorepo gains a second developer. A second contributor changes the calculus — role-splitting enforces boundaries that self-review no longer catches reliably.
 
 ## Links
 

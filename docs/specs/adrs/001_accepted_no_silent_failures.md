@@ -78,7 +78,6 @@ When an invariant is violated, the system fails with a clear, immediate error ra
 
 - **Audit all `try/except` (Python) and `catch` (TypeScript) blocks during implementation and in code review.** Each must either translate an error at a boundary (Exception 1), be an explicitly authorized designed retry/dedupe (Exception 2, currently empty), or be removed.
 - **Linters flag broad catch-alls.** `except Exception` / bare `except:` in Python and broad `catch (_)` in TypeScript are caught in CI once CI exists.
-- **Reconsider if:** the system grows beyond the solo-developer scale such that availability genuinely dominates correctness. That is unlikely given the domain (offline verse retrieval over small corpora), but the threshold is large enough that this ADR can be revisited rather than contorted to fit.
 
 ## Links
 

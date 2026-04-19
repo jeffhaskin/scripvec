@@ -118,7 +118,6 @@ If the second sentence cannot be written, the package is not ready to exist.
 - **Every new file commits into one of the folders named above.** A PR that creates a new top-level folder requires an amendment to this ADR.
 - **Every package has a two-sentence README.** Checked at PR review time.
 - **Dependency graph health.** Periodic check (manually or via `madge` if TypeScript / `pydeps` if Python) that no cycles have formed and no disallowed imports have appeared.
-- **Reconsider if:** a fifth package is needed. At that point, draw the graph first and confirm the new package has an obvious home — if it does not, the partitioning is wrong and the structure should be reshaped before the package is added.
 
 ## Links
 
