@@ -35,7 +35,7 @@ Correctness and measurability dominate velocity: every addition must justify its
 The order below reflects current intent. Each entry is a direction, not a commitment; each becomes one or more CRs when it is concrete enough to propose.
 
 1. **MVP — verse-level vector search on Book of Mormon + D&C.**
-   - CR in flight: `cr_001_vector_search_mvp.md`.
+   - CR in flight: `cr-001_vector_search_mvp.md`.
    - Includes corpus ingest, reference normalization, embedding pipeline, vector index, BM25 baseline, eval harness, minimal interface, logging.
 
 2. **Natural-language Q&A on top of retrieval.**

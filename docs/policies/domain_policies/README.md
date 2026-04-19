@@ -12,13 +12,13 @@ Files in this folder are policies whose subject is the policies system — i.e.,
 
 Files in this folder follow the same conventions as any other policy:
 
-- `pl_` type-prefix is required (per `../pl_002_item_numbering_convention.md` clause 4).
+- `pl-` type-prefix is required (per `../pl-002_item_numbering_convention.md` clause 4).
 - Zero-padded numeric prefix after the type-prefix.
-- Example: `pl_001_all_policy_filenames_use_pl_prefix.md`.
+- Example: `pl-001_all_policy_filenames_use_pl_prefix.md`.
 
 ## Recursive application
 
-The rules in this folder apply to the `docs/policies/` tree as a whole. That includes the files in this very folder — `domain_policies/` is itself under `docs/policies/`, so a policy in here that says *"all policies get a `pl_` prefix"* applies to the files in here too. This recursion is deliberate.
+The rules in this folder apply to the `docs/policies/` tree as a whole. That includes the files in this very folder — `domain_policies/` is itself under `docs/policies/`, so a policy in here that says *"all policies get a `pl-` prefix"* applies to the files in here too. This recursion is deliberate.
 
 ## Neighbors
 

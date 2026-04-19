@@ -34,18 +34,18 @@ change_requests/
 ## File naming
 
 ```
-cr_NNN_<slug>.md
+cr-NNN_<slug>.md
 ```
 
-- `cr_` — **required** type-prefix for change requests, per `../../policies/pl_002_item_numbering_convention.md` clause 4.
-- `NNN` — zero-padded number (3 digits per `../../policies/pl_002_item_numbering_convention.md`), append-only across all statuses. The number never changes once assigned.
+- `cr-` — **required** type-prefix for change requests, per `../../policies/pl-002_item_numbering_convention.md` clause 4.
+- `NNN` — zero-padded number (3 digits per `../../policies/pl-002_item_numbering_convention.md`), append-only across all statuses. The number never changes once assigned.
 - `<slug>` — short snake_case descriptor.
 
-Example: `cr_001_vector_search_mvp.md`.
+Example: `cr-001_vector_search_mvp.md`.
 
 **Status is not in the filename.** It is implicit in which status folder the file sits in. When status changes, the file moves between folders; the name does not change. (This is a deliberate departure from the ADR convention, where status *is* part of the filename.)
 
-Filenames comply with `../../policies/pl_001_file_and_folder_naming_convention.md` (underscores, no spaces).
+Filenames comply with `../../policies/pl-001_file_and_folder_naming_convention.md` (underscores, no spaces).
 
 ## Template
 

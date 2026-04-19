@@ -31,7 +31,7 @@ scripvec is a greenfield monorepo with no code. The Monorepo Architect persona, 
 
 **Decision drivers:**
 
-- The vision (`docs/specs/vision_tree/000_overall_vision.md`) and MVP CR (`cr_001_vector_search_mvp.md`) describe a system with distinct bounded contexts: corpus ingest, citation parsing, retrieval (embeddings + index + BM25 + hybrid), and evaluation. Those are the MVP's domains.
+- The vision (`docs/specs/vision_tree/000_overall_vision.md`) and MVP CR (`cr-001_vector_search_mvp.md`) describe a system with distinct bounded contexts: corpus ingest, citation parsing, retrieval (embeddings + index + BM25 + hybrid), and evaluation. Those are the MVP's domains.
 - A future UI or other deployable is plausible; `apps/` exists now even with a single app so that the shape teaches future-self where logic lives (`packages/`) versus where wiring lives (`apps/`).
 - Corpora and built indexes are artifacts, not code. They belong in a sibling of `apps/` and `packages/`, not inside either.
 - Out-of-scope items from CR-001 (Q&A, Webster's 1828, commentary-as-vectors, Bible corpus) must **not** appear as empty folders. A placeholder folder teaches the next contributor that speculative work belongs there.
@@ -74,8 +74,8 @@ scripvec/
 
 **Naming rules specific to this structure:**
 
-- Folder names use underscores, lowercase, per policy `pl_001_file_and_folder_naming_convention.md`.
-- Packages are **peer modules** with no inherent sequence; policy `pl_002_item_numbering_convention.md` governs ordered documents, not package folders. **Packages do not carry numeric prefixes.**
+- Folder names use underscores, lowercase, per policy `pl-001_file_and_folder_naming_convention.md`.
+- Packages are **peer modules** with no inherent sequence; policy `pl-002_item_numbering_convention.md` governs ordered documents, not package folders. **Packages do not carry numeric prefixes.**
 - If/when distribution names become relevant (PyPI, npm), scoped names (`@scripvec/retrieval` for npm, `scripvec-retrieval` for PyPI) may differ from the folder name. The folder name remains canonical inside the repo.
 - Apps are named with a `scripvec_` prefix to make their role unambiguous (`scripvec_cli`, and any future `scripvec_web`, `scripvec_api`, etc.).
 
@@ -123,11 +123,11 @@ If the second sentence cannot be written, the package is not ready to exist.
 ## Links
 
 - `/data/projects/flywheel/personas/monorepo_architect.md` — source of the recommendation; see "Day-one tree" and "Why this shape."
-- `docs/policies/pl_001_file_and_folder_naming_convention.md` — underscore rule applied to folder names here.
-- `docs/policies/pl_002_item_numbering_convention.md` — referenced in the *packages carry no numeric prefix* clause.
+- `docs/policies/pl-001_file_and_folder_naming_convention.md` — underscore rule applied to folder names here.
+- `docs/policies/pl-002_item_numbering_convention.md` — referenced in the *packages carry no numeric prefix* clause.
 - `docs/specs/adrs/002_accepted_no_role_splitting_in_packages.md` — package internals stay flat.
 - `docs/specs/adrs/004_accepted_mvp_tooling_floor.md` — the build/workspace tooling that operates on this structure.
-- `cr_001_vector_search_mvp.md` — MVP scope; every in-scope item above has a home in this structure.
+- `cr-001_vector_search_mvp.md` — MVP scope; every in-scope item above has a home in this structure.
 
 ## Conflicts surfaced
 
