@@ -52,6 +52,37 @@ The order below reflects current intent. Each entry is a direction, not a commit
 
 ---
 
+## MVP 0.0 — first cut of real code
+
+> *The documents are done. The rules are set. Starting here, the bytes of this project become code, not prose.*
+
+This is the ordered build plan for the first end-to-end cut of scripvec. It is a walking skeleton: every part is real, nothing is stubbed, and the scope is exactly what is already locked by ADRs 001–008 and CR-002 — nothing more. When this plan is done, `scripvec query "..."` returns ranked verses against a real index built from the real corpus, `scripvec eval run` emits real metrics, and the CR-002 ship criteria either pass or fail loudly per ADR-001.
+
+Execution is linear — each phase depends on the one above it.
+
+1. **Workspace scaffolding.** Fill in `pyproject.toml` for every package under `packages/*` and the app under `apps/scripvec_cli/` with real dependencies (`typer`, `httpx`, `sqlite-vec`, `bm25s`, `numpy`). Confirm `uv sync` resolves at the root. No application code yet.
+
+2. **`packages/reference/`.** Citation parse and canonicalize (`parse_reference`, `canonical`). Leaf package, no in-repo imports. Covers the BoM and D&C reference forms present in `data/raw/bcbooks/`.
+
+3. **`packages/corpus_ingest/`.** Walks `data/raw/bcbooks/{book-of-mormon,doctrine-and-covenants}.json` and emits `VerseRecord(verse_id, ref_canonical, book, chapter, verse, text)`. Uses `reference` for canonical strings. Leaf-plus-one in the dependency graph.
+
+4. **`packages/retrieval/`.** The core. Flat module layout per ADR-002:
+   - Single embed client module — synchronous `embed(text) -> list[float]`, env-sourced config, serial only (ADR-006), client-side L2-normalized (ADR-005). This is the only sanctioned entry point to the embedding endpoint.
+   - Config-hash manifest — BLAKE2b-128 over the manifest named in CR-002.
+   - `build_index()` — ingest → embed serially per verse → insert into `corpus.sqlite` (`verses` table + `vec0 float[1024]`) → build `bm25.bm25s` → write `config.json` → update the `latest` symlink on success.
+   - `query()` — load index, BM25S top-50 and dense inner-product top-50, RRF fuse at `k = 60`, return top-k with per-component scores and a latency breakdown.
+   - Endpoint-drift and corpus-drift guards (ADR-001).
+
+5. **`packages/eval/`.** `run_eval(queries, judgments, index)` — executes every query through the full query path, computes recall@10, recall@20, nDCG@10, MRR@10 per mode, stratifies recall@10 by tag bucket, emits the metrics object and a failures file at `data/eval/failures_<ts>.jsonl`. Sanity checks per CR-002 run on entry.
+
+6. **`apps/scripvec_cli/`.** Typer entry points for every subcommand in CR-002 (`query`, `index build`, `index list`, `eval run`, `feedback`, `--version`). JSON default output (ADR-007), structured stderr errors, granular exit codes, deterministic ordering, per-command help text with the documented schema and an example. Query and feedback events append to `data/logs/*.jsonl`.
+
+7. **Eval corpus.** Author `data/eval/queries.jsonl` (50-query floor) and `data/eval/judgments.jsonl` (graded 1/2; 0 = absent) spanning the four stratification buckets (`doctrinal`, `narrative`, `phrase-memory`, `proper-noun`), at least 8 queries per bucket.
+
+8. **Build and validate.** Run `scripvec index build --from-scratch`, then `scripvec eval run --queries data/eval/queries.jsonl --judgments data/eval/judgments.jsonl`. Smoke `scripvec query "faith and works" --k 10`. Report each CR-002 ship criterion as pass or fail in the eval output; do not paper over a failure.
+
+---
+
 ## Amendment log
 
 Append-only record of roadmap edits. Earlier lines are never rewritten.
@@ -59,3 +90,4 @@ Append-only record of roadmap edits. Earlier lines are never rewritten.
 | Date | Change | Author |
 |------|--------|--------|
 | 2026-04-19 | created — initial roadmap capturing MVP through Bible per overall vision | Jeff Haskin |
+| 2026-04-20 | added — MVP 0.0 build plan, the first ordered implementation sequence | Jeff Haskin |
