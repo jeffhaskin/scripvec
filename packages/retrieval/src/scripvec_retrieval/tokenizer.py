@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 import unicodedata
 
+TOKENIZER_VERSION = 1
+
 _WORD_BOUNDARY = re.compile(r"\W+")
 _PURE_DIGIT = re.compile(r"^\d+$")
 
