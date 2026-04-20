@@ -4,8 +4,8 @@ from __future__ import annotations
 
 
 def rrf(
-    bm25_hits: list[str],
-    dense_hits: list[str],
+    bm25_hits: list[tuple[str, float]],
+    dense_hits: list[tuple[str, float]],
     *,
     k: int = 60,
     top_k: int = 10,
@@ -13,8 +13,8 @@ def rrf(
     """Fuse BM25 and dense retrieval results using Reciprocal Rank Fusion.
 
     Args:
-        bm25_hits: Ranked list of verse_ids from BM25 retrieval.
-        dense_hits: Ranked list of verse_ids from dense retrieval.
+        bm25_hits: Ranked list of (verse_id, score) from BM25 retrieval.
+        dense_hits: Ranked list of (verse_id, score) from dense retrieval.
         k: RRF smoothing constant (default 60).
         top_k: Number of results to return.
 
@@ -32,10 +32,10 @@ def rrf(
 
     scores: dict[str, float] = {}
 
-    for rank, verse_id in enumerate(bm25_hits, start=1):
+    for rank, (verse_id, _) in enumerate(bm25_hits, start=1):
         scores[verse_id] = scores.get(verse_id, 0.0) + 1.0 / (k + rank)
 
-    for rank, verse_id in enumerate(dense_hits, start=1):
+    for rank, (verse_id, _) in enumerate(dense_hits, start=1):
         scores[verse_id] = scores.get(verse_id, 0.0) + 1.0 / (k + rank)
 
     sorted_results = sorted(

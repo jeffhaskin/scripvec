@@ -10,29 +10,29 @@ class TestRRFFormula:
 
     def test_single_source_bm25_only(self) -> None:
         """Single item from BM25 gets score 1/(k+1)."""
-        result = rrf(["verse-a"], [], k=60, top_k=10)
+        result = rrf([("verse-a", 1.0)], [], k=60, top_k=10)
         assert len(result) == 1
         assert result[0][0] == "verse-a"
         assert result[0][1] == pytest.approx(1.0 / 61)
 
     def test_single_source_dense_only(self) -> None:
         """Single item from dense gets score 1/(k+1)."""
-        result = rrf([], ["verse-b"], k=60, top_k=10)
+        result = rrf([], [("verse-b", 1.0)], k=60, top_k=10)
         assert len(result) == 1
         assert result[0][0] == "verse-b"
         assert result[0][1] == pytest.approx(1.0 / 61)
 
     def test_overlapping_results_sum_scores(self) -> None:
         """Item in both lists gets sum of reciprocal ranks."""
-        result = rrf(["verse-a"], ["verse-a"], k=60, top_k=10)
+        result = rrf([("verse-a", 1.0)], [("verse-a", 1.0)], k=60, top_k=10)
         assert len(result) == 1
         assert result[0][0] == "verse-a"
         assert result[0][1] == pytest.approx(2.0 / 61)
 
     def test_different_ranks_in_each_source(self) -> None:
         """Item at different ranks gets correct sum."""
-        bm25 = ["verse-a", "verse-b"]
-        dense = ["verse-b", "verse-a"]
+        bm25 = [("verse-a", 1.0), ("verse-b", 0.9)]
+        dense = [("verse-b", 1.0), ("verse-a", 0.9)]
         result = rrf(bm25, dense, k=60, top_k=10)
 
         scores = {vid: score for vid, score in result}
@@ -47,8 +47,8 @@ class TestTiebreaking:
 
     def test_ties_broken_by_verse_id_ascending(self) -> None:
         """When scores tie, earlier verse_id comes first."""
-        bm25 = ["z-verse"]
-        dense = ["a-verse"]
+        bm25 = [("z-verse", 1.0)]
+        dense = [("a-verse", 1.0)]
         result = rrf(bm25, dense, k=60, top_k=10)
 
         assert result[0][0] == "a-verse"
@@ -57,8 +57,8 @@ class TestTiebreaking:
 
     def test_equal_rrf_scores_alphabetical_order(self) -> None:
         """Items with identical RRF scores sort alphabetically."""
-        bm25 = ["verse-c"]
-        dense = ["verse-a"]
+        bm25 = [("verse-c", 1.0)]
+        dense = [("verse-a", 1.0)]
         result = rrf(bm25, dense, k=60, top_k=10)
 
         assert result[0][0] == "verse-a"
@@ -70,13 +70,13 @@ class TestTopKTruncation:
 
     def test_truncates_to_top_k(self) -> None:
         """Only top_k results returned."""
-        bm25 = [f"verse-{i}" for i in range(20)]
+        bm25 = [(f"verse-{i}", 1.0) for i in range(20)]
         result = rrf(bm25, [], k=60, top_k=5)
         assert len(result) == 5
 
     def test_returns_fewer_than_top_k_if_not_enough(self) -> None:
         """Returns all items if fewer than top_k exist."""
-        result = rrf(["verse-a", "verse-b"], [], k=60, top_k=10)
+        result = rrf([("verse-a", 1.0), ("verse-b", 0.9)], [], k=60, top_k=10)
         assert len(result) == 2
 
 
@@ -85,8 +85,8 @@ class TestDisjointInputs:
 
     def test_disjoint_inputs_all_included(self) -> None:
         """Items from both lists included even without overlap."""
-        bm25 = ["verse-a", "verse-b"]
-        dense = ["verse-c", "verse-d"]
+        bm25 = [("verse-a", 1.0), ("verse-b", 0.9)]
+        dense = [("verse-c", 1.0), ("verse-d", 0.9)]
         result = rrf(bm25, dense, k=60, top_k=10)
 
         verse_ids = {vid for vid, _ in result}
@@ -94,8 +94,8 @@ class TestDisjointInputs:
 
     def test_disjoint_inputs_correct_scores(self) -> None:
         """Disjoint items each get score from their source only."""
-        bm25 = ["verse-a"]
-        dense = ["verse-b"]
+        bm25 = [("verse-a", 1.0)]
+        dense = [("verse-b", 1.0)]
         result = rrf(bm25, dense, k=60, top_k=10)
 
         scores = {vid: score for vid, score in result}
@@ -132,8 +132,8 @@ class TestDeterminism:
 
     def test_repeated_calls_same_result(self) -> None:
         """Multiple calls with same input produce identical output."""
-        bm25 = ["verse-c", "verse-a", "verse-b"]
-        dense = ["verse-b", "verse-d", "verse-a"]
+        bm25 = [("verse-c", 1.0), ("verse-a", 0.9), ("verse-b", 0.8)]
+        dense = [("verse-b", 1.0), ("verse-d", 0.9), ("verse-a", 0.8)]
 
         result1 = rrf(bm25, dense, k=60, top_k=10)
         result2 = rrf(bm25, dense, k=60, top_k=10)
