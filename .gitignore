@@ -57,3 +57,4 @@ coverage/
 /data/logs/*
 !/data/logs/.gitkeep
 
+.scripvec_config.json
