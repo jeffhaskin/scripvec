@@ -36,3 +36,20 @@ logs/
 # Coverage
 coverage/
 *.lcov
+
+# Python caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+*.pyc
+
+# Data artifacts (ADR-003 data folder conventions)
+# - data/raw/ is corpora — reproducible from canonical source
+# - data/indexes/ is build output — deterministic from code + config + raw corpus
+# - data/eval/ IS checked in (query set + graded relevance are authored artifacts)
+/data/raw/
+/data/indexes/
+!/data/raw/.gitkeep
+!/data/indexes/.gitkeep
+

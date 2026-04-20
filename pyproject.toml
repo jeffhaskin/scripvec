@@ -1,0 +1,30 @@
+[project]
+name = "scripvec"
+version = "0.0.0"
+description = "Vector search over LDS scripture — workspace root."
+requires-python = ">=3.12"
+
+[tool.uv.workspace]
+members = ["apps/*", "packages/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["data"]
+
+[tool.ruff.lint]
+select = [
+  "E",    # pycodestyle errors
+  "W",    # pycodestyle warnings
+  "F",    # pyflakes
+  "I",    # isort
+  "B",    # flake8-bugbear
+  "UP",   # pyupgrade
+  "SIM",  # flake8-simplify
+  "RUF",  # ruff-specific
+]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+exclude = ["data/"]

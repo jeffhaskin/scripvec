@@ -1,0 +1,18 @@
+[project]
+name = "scripvec-eval"
+version = "0.0.0"
+description = "Evaluation harness — recall@k, nDCG@10, MRR@10, latency percentiles, and failures file."
+requires-python = ">=3.12"
+dependencies = [
+  "scripvec-retrieval",
+]
+
+[tool.uv.sources]
+scripvec-retrieval = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scripvec_eval"]

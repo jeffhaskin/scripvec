@@ -1,0 +1,10 @@
+# scripvec ownership — single-developer repo, tracked here so ownership is named
+# before it's ambiguous (per ADR-003 guidance).
+
+*                           @jeffhaskin
+/docs/                      @jeffhaskin
+/apps/scripvec_cli/         @jeffhaskin
+/packages/corpus_ingest/    @jeffhaskin
+/packages/reference/        @jeffhaskin
+/packages/retrieval/        @jeffhaskin
+/packages/eval/             @jeffhaskin
