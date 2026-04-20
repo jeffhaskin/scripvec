@@ -41,7 +41,20 @@ class SanityProbe:
     expected_top3: tuple[str, ...]
 
 
-SANITY_PROBES: tuple[SanityProbe, ...] = ()
+SANITY_PROBES: tuple[SanityProbe, ...] = (
+    SanityProbe(
+        query="I will go and do the things which the Lord hath commanded",
+        expected_top3=("1-nephi-3-7",),
+    ),
+    SanityProbe(
+        query="seek learning even by study and also by faith",
+        expected_top3=("dandc-88-118",),
+    ),
+    SanityProbe(
+        query="faith is not to have a perfect knowledge of things",
+        expected_top3=("alma-32-21",),
+    ),
+)
 
 
 def _parse_query_row(line: str, line_num: int) -> QueryRow:
