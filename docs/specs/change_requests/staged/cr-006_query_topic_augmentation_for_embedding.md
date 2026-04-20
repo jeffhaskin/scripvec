@@ -1,7 +1,7 @@
 ---
 id: 006
 title: Query topic augmentation before embedding
-status: drafting
+status: staged
 created: 2026-04-20
 updated: 2026-04-20
 references:
@@ -119,3 +119,4 @@ Not yet decided. This CR is in `drafting/` pending engineer review of the propos
 ## Audit log
 
 - 2026-04-20 — created as `drafting`.
+- 2026-04-20 — `drafting` → `staged`. The augmentation LLM is the `qwen3.5-4b_ctx4096` chat model already exposed by the shared flywheel inferencing server (see `/data/projects/flywheel/docs/making_tools.md`); the 4K context is sufficient for the single-query augmentation prompt. Engineer committed to staging alongside CR-010..CR-015 as part of the CLI feature set powering the web front-end.

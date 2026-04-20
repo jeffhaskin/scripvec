@@ -28,3 +28,10 @@ select = [
 python_version = "3.12"
 strict = true
 exclude = ["data/"]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.20.1",
+    "pytest>=9.0.3",
+    "ruff>=0.15.11",
+]

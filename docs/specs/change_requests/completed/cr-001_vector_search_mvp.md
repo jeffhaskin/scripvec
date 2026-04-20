@@ -1,7 +1,7 @@
 # 001 — Vector Search MVP
 
 ## Status
-Draft.
+Completed.
 
 ## Intent
 Build the MVP: a standard vector search over the Book of Mormon and the Doctrine and Covenants at verse-level granularity. A user submits a natural-language query; the system returns the most semantically relevant verses. Nothing more.
@@ -1880,3 +1880,4 @@ These are flagged for the engineer.
 - 2026-04-20 — function plan: resolved design questions 1 (verse_id slug) and 4 (`DenseHit.cosine` — confirmed via Qwen3-Embedding-0.6B model card on HuggingFace); design questions 2, 5, 6 still pending engineer; question 3 reframed as a System-9 authoring task (no code decision).
 - 2026-04-20 — function plan: resolved design questions 2 (`config.json` `created_at` → file mtime; smooth hash semantics preferred over a stored field) and 6 (test coverage expanded — 8 new test files added for tokenizer, RRF, hashing, manifest round-trip, both drift guards, metrics, and JSONL loaders; `store.py` / `bm25.py` remain integration-test surfaces). File blueprint, function plan, dependency graph, and topological rank list updated to reflect 36 new code files (from 28). Design question 5 (`embed` non-re-export) still pending engineer confirmation.
 - 2026-04-20 — function plan: resolved design question 5 (`embed` non-re-exported from `scripvec_retrieval.__init__` — hidden, to discourage callers from naively wrapping the synchronous embed call in a thread pool / async pattern that would violate ADR-006). All six design questions now resolved.
+- 2026-04-20 — **completed.** All 30 implementation tasks finished; eval harness passes ship criteria; CR moved to `completed/`.
