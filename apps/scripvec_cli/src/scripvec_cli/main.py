@@ -12,8 +12,9 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
-app.add_typer(query_cmd.app, name="query")
-app.add_typer(index_cmd.app, name="index")
+query_cmd.register(app)
+index_cmd.register(app)
+version_cmd.register(app)
+
 app.add_typer(eval_cmd.app, name="eval")
 app.add_typer(feedback_cmd.app, name="feedback")
-app.registered_commands.extend(version_cmd.app.registered_commands)
