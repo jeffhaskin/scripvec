@@ -5,6 +5,7 @@ description = "Typer-backed CLI — query in, verses out. The single MVP deploya
 requires-python = ">=3.12"
 dependencies = [
   "scripvec-retrieval",
+  "typer",
 ]
 
 [project.scripts]
